@@ -130,3 +130,5 @@ dmypy.json
 
 # ignore folder and content
 /charts/*
+/app_data/*
+/app_log.txt
