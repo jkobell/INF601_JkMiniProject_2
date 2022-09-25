@@ -9,7 +9,7 @@ logging.basicConfig(filename='app_log.txt', format='%(asctime)s %(message)s' ,en
 ticker = 'TSLA' # todo: make interactive with input control
 data_filename = (f"app_data/{ticker}.csv")
 try: # log if exception
-    df = pd.read_csv(data_filename) # input data from csv into dataframe
+    df = pd.read_csv(data_filename) # input data from csv into dataframe | todo: make interactive with input control
 except Exception as Argument:
     logging.exception(f"An error occured while creating a dataframe from {data_filename} | Error: {str(Argument)}")
 df_years = [] # declare years list
