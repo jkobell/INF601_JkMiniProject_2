@@ -37,7 +37,7 @@ Python 3.10.6
 ### Alternate dataset file types
 - In main.py, replace 'read_csv' at `df = pd.read_csv(data_filename)` with a suitable method name for reading the targeted dataset filetype. 
 - Example: In main.py, replace 'read_csv' at `df = pd.read_csv(data_filename)` with 'read_json' for reading a targeted dataset with a name format as '[ticker symbol].json.
-- Result: `df = pd.read_json(data_filename)`
+- Example result: `df = pd.read_json(data_filename)`
 
 ### Contributing
 - Please open an issue to initiate a change process.
