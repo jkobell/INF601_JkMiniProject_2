@@ -25,16 +25,16 @@ begin_df_row = df.head(n=1)
 end_df_row = df.tail(n=1)
 begin_df_date = pd.to_datetime(begin_df_row['Date'])
 end_df_date = pd.to_datetime(end_df_row['Date'])
-begin_df_date_int32 = begin_df_date.dt.year.astype(int).values[0]
-begin_df_year = str(begin_df_date_int32) #int64 to string
+begin_year_df_date_int32 = begin_df_date.dt.year.astype(int).values[0]
+begin_df_year = str(begin_year_df_date_int32) #int32 to string
 end_df_date_int32 = end_df_date.dt.year.astype(int).values[0]
-end_df_year = str(end_df_date_int32) #int64 to string
-years_df_range = end_df_date_int32 - begin_df_date_int32 + 1
+end_df_year = str(end_df_date_int32) #int32 to string
+years_df_range = end_df_date_int32 - begin_year_df_date_int32 + 1
 for i in range(years_df_range):
     if begin_df_year:
-        df_year = df[(df['Date'] > f"{begin_df_year}-01-01") & (df['Date'] < f"{begin_df_year}-12-31")]
-        begin_df_date_int32 += 1
-        begin_df_year = str(begin_df_date_int32)
+        df_year = df[(df['Date'] >= f"{begin_df_year}-01-01") & (df['Date'] <= f"{begin_df_year}-12-31")]
+        begin_year_df_date_int32 += 1
+        begin_df_year = str(begin_year_df_date_int32)
         df_years.append(df_year)
 
 ###print(begin_year)
@@ -42,21 +42,34 @@ for i in range(years_df_range):
 #print(years_range)
 #print(len(df_years))
 df_months = []
-
 for item in df_years:
     df_item = pd.DataFrame(item) # cast as a DataFrame
     begin_year_df_row = df_item.head(n=1)
-    end_year_df_row = df_item.tail(n=1)
+    end_year_df_row = df_item.tail(n=1)    
     begin_year_df_date = pd.to_datetime(begin_year_df_row['Date'])
     end_year_df_date = pd.to_datetime(end_year_df_row['Date'])
-    begin_year_df_date_int32 = begin_year_df_date.dt.month.astype(int).values[0]
-    begin_year_df_year = str(begin_year_df_date_int32) #int64 to string
-    end_year_df_date_int32 = end_year_df_date.dt.month.astype(int).values[0]
-    end_year_df_year = str(end_year_df_date_int32) #int64 to string
-    year_df_range = end_year_df_date_int32 - begin_year_df_date_int32 + 1
+    begin_year_df_date_int32 = begin_year_df_date.dt.year.astype(int).values[0]
+    begin_year_df_year = str(begin_year_df_date_int32) #int32 to string
+    begin_month_df_date_int32 = begin_year_df_date.dt.month.astype(int).values[0]
+    begin_month_df_date = str(begin_month_df_date_int32) #int32 to string
+    end_month_df_date_int32 = end_year_df_date.dt.month.astype(int).values[0]
+    end_month_df_date = str(end_month_df_date_int32) #int32 to string
+    months_df_range = end_month_df_date_int32 - begin_month_df_date_int32 + 1
+    for i in range(months_df_range):
+        if begin_month_df_date:
+            if len(begin_month_df_date) == 1:
+                begin_month_df_date = f"0{begin_month_df_date}"
+        df_month = df_item[(df_item['Date'] >= f"{begin_year_df_year}-{begin_month_df_date}-01") & (df_item['Date'] <= f"{begin_year_df_year}-{begin_month_df_date}-31")]
+        begin_month_df_date_int32 += 1
+        begin_month_df_date = str(begin_month_df_date_int32)
+        df_months.append(df_month)
+
+
     
     
-    print(year_df_range)
+    print(months_df_range)
+    print(len(df_month))
+    print(len(df_months))
     #print(len(item))
     
     #print(item)
