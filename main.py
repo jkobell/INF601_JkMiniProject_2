@@ -73,7 +73,10 @@ for item in df_years:
             month_close_average = month_close_prices_sum / month_item_count
             close_average.append(month_close_average)
     close_average_df = pd.DataFrame(close_average)
-    print(close_average_df)
+    plt.figure()
+    plt.plot(close_average_df)
+    plt.show()
+    #print(close_average_df)
         
 
 
