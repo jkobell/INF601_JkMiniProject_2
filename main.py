@@ -1,3 +1,6 @@
+# INF601 - Advanced Programming in Python
+# James Kobell
+# Mini Project 2
 import logging
 import matplotlib.pyplot as plt
 import numpy as np
